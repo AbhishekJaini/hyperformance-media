@@ -1,0 +1,58 @@
+---
+// Stats / Results section — primary-colored band with supporting context
+// Inspired by ClassPass / Spotify stats patterns: large numbers + context
+// Stats are placeholders — replace with real numbers later.
+// The "7+ Brands Across Industries" stat reflects real experience across
+// perfumes, textiles, chemicals, e-commerce, and home services without
+// naming any specific client (client confidentiality).
+const stats = [
+  { count: 50, suffix: '+', label: 'Projects Delivered', context: 'Across SEO, web, and performance marketing' },
+  { count: 3.2, suffix: 'x', decimals: 1, label: 'Avg. Traffic Growth', context: 'Measured within 6 months of engagement' },
+  { count: 98, suffix: '%', label: 'Client Satisfaction', context: 'Based on ongoing client feedback' },
+  { count: 7, suffix: '+', label: 'Brands Across India', context: 'Perfumes, textiles, chemicals, e-commerce' },
+  { count: 24, suffix: '/7', label: 'Support Availability', context: 'Always-on monitoring and response' },
+];
+---
+<section class="relative overflow-hidden bg-primary px-6 py-20 md:py-28">
+  <!-- Decorative pattern: subtle dots -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.07]"
+    style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 32px 32px;"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl">
+    <!-- Header -->
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-white" data-reveal="fade">
+        <span class="inline-block h-2 w-2 rounded-full bg-white" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
+        Our Impact
+      </span>
+      <h2 class="mt-6 text-h2 text-white" data-reveal data-reveal-delay="1">Results That Speak for Themselves</h2>
+      <p class="mx-auto mt-4 max-w-xl text-body-lg text-white/80" data-reveal data-reveal-delay="2">
+        We measure what matters — traffic, leads, and revenue. Not vanity metrics.
+      </p>
+    </div>
+
+    <!-- Stats grid with dividers (inspired by ClassPass) -->
+    <div class="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-card bg-white/15 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      {stats.map((stat, i) => (
+        <div
+          class:list={[
+            'bg-primary px-6 py-8 text-center transition-all duration-300 hover:bg-primary-dark hover:scale-[1.03]',
+            i === 4 && 'sm:col-span-2 md:col-span-1',
+          ]}
+          data-reveal="scale"
+          data-reveal-delay={i + 1}
+        >
+          <div class="text-4xl font-bold text-white md:text-5xl" data-count={stat.count} data-suffix={stat.suffix} data-decimals={stat.decimals || 0}>
+            {stat.count}{stat.suffix}
+          </div>
+          <div class="mt-2 text-body font-semibold text-white">{stat.label}</div>
+          <div class="mt-1 text-body-sm text-white/60">{stat.context}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

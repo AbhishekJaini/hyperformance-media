@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FinalCta from '../components/FinalCta.astro';
+
+// 8 real services from client content — clean 2-column grid (4 rows)
+const services = [
+  {
+    title: 'Website Development',
+    body: 'User-friendly, mobile-optimized, digital-marketing-friendly websites that drive engagement, generate leads, and boost conversions. From corporate sites to full-scale e-commerce platforms.',
+    icon: 'M3 5h18v14H3zM3 9h18M9 9v10',
+  },
+  {
+    title: 'Search Engine Optimisation',
+    body: 'Sustainable SEO strategies combining technical precision, content excellence, and data-driven insights. Keyword research, on-page optimization, backlink building, and technical audits for local and global search visibility.',
+    icon: 'M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z',
+  },
+  {
+    title: 'App / CRM Development',
+    body: 'Custom CRM development, business mobile applications, workflow automation, and AI-powered CRM tools. Helping businesses save time and increase efficiency across sales and lead management.',
+    icon: 'M4 6h16M4 12h16M4 18h16M8 6v12M16 6v12',
+  },
+  {
+    title: 'E-Commerce',
+    body: 'Managing brand presence across Amazon, Flipkart, Meesho, and other marketplaces. Account setup, SEO-driven listings, inventory management, A+ content creation, order tracking, and platform compliance.',
+    icon: 'M3 3h18l-2 4H5L3 3zM5 7h14l-1 14H6L5 7zM9 11h6',
+  },
+  {
+    title: 'Next-Gen AI Modelling',
+    body: 'Advanced SEO techniques including geo-tagging for city, state, and country visibility. Local keyword optimization, competitor SWOT analysis, and targeting first-page Google rankings.',
+    icon: 'M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4 4 4 0 0 1-4-4V6a4 4 0 0 1 4-4zM6 20a6 6 0 0 1 12 0',
+  },
+  {
+    title: 'Social Media Management',
+    body: 'Full brand storytelling and engagement across Instagram, Facebook, LinkedIn, YouTube, and X. Content calendars, post design, ad campaigns, and influencer collaborations.',
+    icon: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
+  },
+  {
+    title: 'Performance Marketing',
+    body: 'Revenue-focused paid campaigns across Google (search, display, shopping, YouTube), Meta, and LinkedIn. Full-funnel strategy, ad creatives, audience targeting, and optimization for leads, installs, sales, or brand visibility.',
+    icon: 'M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6',
+  },
+  {
+    title: 'Influencer Marketing',
+    body: 'Connecting brands with audiences through influencer videos and AI-driven celebrity-style video content distributed across social channels and WhatsApp.',
+    icon: 'M17 20h5v-2a4 4 0 0 0-3-3.87M9 20H4v-2a4 4 0 0 1 3-3.87m6-1.13a4 4 0 1 0-4-4 4 4 0 0 0 4 4z',
+  },
+];
+---
+<BaseLayout
+	title="Digital Marketing Services | Hyperformance Media"
+	description="Explore our services: SEO, website development, app/CRM development, e-commerce management, social media, performance marketing, and influencer marketing."
+	path="/services"
+>
+  <!-- Intro block -->
+  <section class="bg-background px-6 pt-32 pb-16 md:pt-40 md:pb-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary" data-reveal="fade">
+        Our Services
+      </span>
+      <h1 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">What We Do</h1>
+      <p class="mx-auto mt-6 max-w-3xl text-body-lg text-text-secondary" data-reveal data-reveal-delay="2">
+        Full-stack digital marketing services designed to grow your brand online - from
+        search visibility and conversion-ready websites to performance marketing and
+        AI-powered automation.
+      </p>
+    </div>
+  </section>
+
+  <!-- 8 services in a clean 2-column grid -->
+  <section class="bg-surface px-6 py-20 md:py-28">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {services.map((service, i) => (
+          <div
+            class="group rounded-card border border-border bg-background p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1.5 hover:border-primary/30"
+            data-reveal="scale"
+            data-reveal-delay={(i % 2) + 1}
+          >
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-button bg-primary/10 text-primary-dark transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:rotate-3">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+              </svg>
+            </div>
+            <h2 class="mt-5 text-h4 text-text-primary">{service.title}</h2>
+            <p class="mt-3 text-body text-text-secondary">{service.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>

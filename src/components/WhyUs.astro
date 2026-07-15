@@ -1,0 +1,71 @@
+---
+// Why Us section — 3-card grid with hover lift, surface background
+// Inspired by Claude / Deel feature card patterns: icon + title + body + link
+// id="why-us" is the anchor target for the navbar's "Why Us" link.
+const cards = [
+  {
+    title: 'SEO & Search Optimization',
+    body: 'We climb the rankings so your brand gets found first. Technical SEO, content strategy, and keyword targeting that drives organic traffic.',
+    icon: 'M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z',
+    link: '/services',
+  },
+  {
+    title: 'Lead Generation',
+    body: 'Turn visitors into qualified leads with data-driven funnels, landing pages, and conversion optimization built to scale your pipeline.',
+    icon: 'M3 3v18h18M7 14l4-4 3 3 5-6',
+    link: '/services',
+  },
+  {
+    title: 'Website Creation',
+    body: 'Fast, beautiful, conversion-ready websites. From design to deployment, we build sites that look great and perform even better.',
+    icon: 'M3 5h18v14H3zM3 9h18M9 9v10',
+    link: '/services',
+  },
+];
+---
+<section id="why-us" class="scroll-mt-24 bg-surface px-6 py-20 md:py-28">
+  <div class="mx-auto max-w-7xl">
+    <!-- Header -->
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-background px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary" data-reveal="fade">
+        <span class="inline-block h-2 w-2 rounded-full bg-primary" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
+        Why Hyperformance Media
+      </span>
+      <h2 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">Why Choose Us</h2>
+      <p class="mx-auto mt-4 max-w-xl text-body-lg text-text-secondary" data-reveal data-reveal-delay="2">
+        We combine AI-powered tooling with marketing fundamentals to deliver growth that is measurable, sustainable, and scalable.
+      </p>
+    </div>
+
+    <!-- 3-column card grid with hover lift -->
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {cards.map((card, i) => (
+        <div
+          class="group relative rounded-card border border-border bg-background p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-2 hover:border-primary/30"
+          data-reveal="scale"
+          data-reveal-delay={i + 1}
+        >
+          <!-- Icon — fills with primary on hover -->
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-button bg-primary/10 text-primary-dark transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:rotate-3">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d={card.icon} />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-h4 text-text-primary">{card.title}</h3>
+          <p class="mt-3 text-body text-text-secondary">{card.body}</p>
+
+          <!-- Learn more link — appears with arrow on hover -->
+          <a
+            href={card.link}
+            class="mt-5 inline-flex items-center gap-1.5 text-body font-medium text-primary transition-colors hover:text-primary-dark"
+          >
+            Learn more about {card.title}
+            <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

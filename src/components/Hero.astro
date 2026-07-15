@@ -1,0 +1,57 @@
+---
+// Hero section — centered single-column layout
+---
+
+<!-- Background accent: subtle grid pattern, very low opacity -->
+<section class="relative overflow-hidden bg-background px-6 pt-32 pb-20 md:pt-40 md:pb-28">
+  <!-- Decorative grid background -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.03]"
+    style="background-image: linear-gradient(var(--color-text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-text-primary) 1px, transparent 1px); background-size: 48px 48px;"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Decorative blue glow, top-right -->
+  <div
+    class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-3xl text-center">
+    <!-- Eyebrow / label -->
+    <span class="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary">
+      <span class="inline-block h-2 w-2 rounded-full bg-primary"></span>
+      AI-Powered Digital Marketing Agency
+    </span>
+
+    <!-- Headline — "Powered by AI" in primary, rest in text-primary -->
+    <h1 class="mt-6 text-4xl font-bold leading-tight text-text-primary sm:text-5xl md:text-h1">
+      Next-Gen Marketing,<br class="hidden sm:block" />
+      <span class="text-primary">Powered by AI.</span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="mx-auto mt-6 max-w-2xl text-body-lg text-text-secondary">
+      We're a results-driven digital marketing agency helping brands grow online
+      through SEO, web design, social media, and content that converts.
+    </p>
+
+    <!-- CTAs -->
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a
+        href="/contact"
+        class="inline-flex w-full items-center justify-center rounded-button bg-primary px-7 py-3.5 text-body font-medium text-white shadow-card transition-colors hover:bg-primary-dark sm:w-auto"
+      >
+        Book Your Free Strategy Call
+      </a>
+      <a
+        href="/services"
+        class="inline-flex w-full items-center justify-center rounded-button border border-border bg-background px-7 py-3.5 text-body font-medium text-text-primary transition-colors hover:border-primary hover:text-primary sm:w-auto"
+      >
+        Our Services
+      </a>
+    </div>
+  </div>
+</section>

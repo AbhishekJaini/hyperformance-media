@@ -1,0 +1,39 @@
+---
+// Final CTA section — primary background with pattern, white text, white CTA button
+// Upgraded with subtle dot pattern for visual depth
+---
+<section class="relative overflow-hidden bg-primary px-6 py-20 md:py-28">
+  <!-- Decorative dot pattern -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.07]"
+    style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 32px 32px;"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Decorative glow — animated drift -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-3xl"
+    style="animation: float 8s ease-in-out infinite;"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-3xl text-center">
+    <h2 class="text-h2 text-white" data-reveal>Ready to Grow Your Business?</h2>
+    <p class="mx-auto mt-5 max-w-xl text-body-lg text-white/85" data-reveal data-reveal-delay="1">
+      Book a free strategy call and we'll map out exactly how to scale your brand online.
+    </p>
+    <div class="mt-10" data-reveal data-reveal-delay="2">
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center gap-2 rounded-button bg-white px-8 py-3.5 text-body font-semibold text-primary shadow-card transition-all duration-300 hover:bg-surface hover:gap-3 hover:shadow-lg hover:-translate-y-0.5"
+      >
+        Book Your Free Strategy Call
+        <svg class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

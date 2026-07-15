@@ -1,0 +1,136 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const SITE_URL = 'https://hyperformancemedia.in';
+const SITE_NAME = 'Hyperformance Media';
+
+const {
+  title = 'Hyperformance Media | AI Digital Marketing Agency Delhi',
+  description = 'AI-powered digital marketing agency in Delhi offering SEO, web development, social media, and performance marketing. Book your free strategy call.',
+  path = '/',
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const canonicalUrl = new URL(path, SITE_URL).href;
+const ogImageUrl = new URL(ogImage, SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+
+		<!-- Canonical -->
+		<link rel="canonical" href={canonicalUrl} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:site_name" content={SITE_NAME} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+	</head>
+	<body class="min-h-screen flex flex-col">
+		<Navbar />
+		<main class="flex-1">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+	<script>
+		// Scroll reveal — IntersectionObserver toggles .is-visible on [data-reveal]
+		(function () {
+			const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const els = document.querySelectorAll('[data-reveal]');
+			if (reduced || !els.length) {
+				els.forEach((el) => el.classList.add('is-visible'));
+				return;
+			}
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('is-visible');
+							io.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+			);
+			els.forEach((el) => io.observe(el));
+		})();
+
+		// Animated counters for [data-count] elements
+		(function () {
+			const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const counters = document.querySelectorAll('[data-count]');
+			if (!counters.length) return;
+
+			function animateCount(el) {
+				const target = parseFloat(el.dataset.count);
+				const suffix = el.dataset.suffix || '';
+				const prefix = el.dataset.prefix || '';
+				const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+				const duration = 1800;
+				const start = performance.now();
+
+				function tick(now) {
+					const elapsed = now - start;
+					const progress = Math.min(elapsed / duration, 1);
+					const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+					const current = target * eased;
+					el.textContent = prefix + current.toFixed(decimals) + suffix;
+					if (progress < 1) requestAnimationFrame(tick);
+					else el.textContent = prefix + target.toFixed(decimals) + suffix;
+				}
+				requestAnimationFrame(tick);
+			}
+
+			if (reduced) {
+				counters.forEach((el) => {
+					const target = parseFloat(el.dataset.count);
+					const suffix = el.dataset.suffix || '';
+					const prefix = el.dataset.prefix || '';
+					const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+					el.textContent = prefix + target.toFixed(decimals) + suffix;
+				});
+				return;
+			}
+
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							animateCount(entry.target);
+							io.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.5 }
+			);
+			counters.forEach((el) => io.observe(el));
+		})();
+	</script>
+</html>

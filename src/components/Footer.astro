@@ -1,0 +1,647 @@
+---
+// Footer — two-card layout inspired by the Kresna footer design
+// Adapted for Hyperformance Media: brand fonts (Plus Jakarta Sans + Inter),
+// brand blue (#2563eb), real nav links, Facebook + Instagram socials.
+// No Caveat/handwritten font — uses the project's own type system.
+// TODO: Subscribe form is UI-only — wire to a real handler (Formspree, API route, etc.)
+// TODO: Replace social URLs with real profile links when available.
+
+const navLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Why Us', href: '/#why-us' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const companyLinks = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Terms and Condition', href: '/terms' },
+  { label: 'Privacy Policy', href: '/privacy' },
+];
+
+const socials = [
+  {
+    label: 'Facebook',
+    href: 'https://facebook.com',
+    icon: 'M9.198 21.5v-7.5H6.5v-3h2.698V8.8c0-2.7 1.65-4.17 4.05-4.17 1.15 0 2.14.086 2.427.124v2.811l-1.666.001c-1.307 0-1.56.621-1.56 1.533V11h3.12l-.406 3h-2.714v7.5H9.198z',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://instagram.com',
+    icon: 'M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z',
+  },
+];
+---
+<footer class="footer-section">
+  <div class="footer-wrapper">
+    <!-- LEFT CARD: dark brand panel with video background -->
+    <div class="footer-left">
+      <!-- Video background -->
+      <video class="footer-left-video" muted loop playsinline preload="auto" aria-hidden="true" id="footer-video">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Logo -->
+      <div class="footer-logo">
+        <div class="footer-logo-mark">H</div>
+        <span class="footer-logo-name">Hyperformance Media</span>
+      </div>
+
+      <!-- Tagline -->
+      <div class="footer-tagline-container">
+        <p class="footer-tagline">
+          Smarter sales automation,<br>
+          <span>powered by AI.</span>
+        </p>
+      </div>
+
+      <!-- Social row -->
+      <div class="footer-social-row">
+        <span class="footer-social-label">Stay in touch!</span>
+        <div class="footer-social-icons">
+          {socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              class="social-icon"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d={social.icon} />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT CARD: light gray panel with nav + subscribe -->
+    <div class="footer-right">
+      <!-- Floating "Feeling ambitious?" badge -->
+      <div class="footer-lucky-graphic">
+        <div class="lucky-cube">
+          <span class="lucky-cube-mark">H</span>
+        </div>
+        <div class="lucky-text-row">
+          <span class="lucky-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 20 C 6 14, 10 9, 18 5" />
+              <path d="M18 5 L 12 5" />
+              <path d="M18 5 L 18 11" />
+            </svg>
+          </span>
+          <span class="lucky-text">Feeling ambitious?</span>
+        </div>
+      </div>
+
+      <!-- Nav columns -->
+      <div class="footer-right-top">
+        <div class="footer-nav-cols">
+          <div class="footer-col">
+            <h3 class="footer-col-title">Navigation</h3>
+            {navLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </div>
+          <div class="footer-col">
+            <h3 class="footer-col-title">Company</h3>
+            {companyLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom: copyright + subscribe -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Hyperformance Media. All rights reserved.</p>
+        <div class="footer-cta-mini">
+          <h4>
+            AI moves fast.<br><strong>Stay ahead with Hyperperformance Media.</strong>
+          </h4>
+          <!-- TODO: Wire subscribe form to a real handler (Formspree, API route, etc.) -->
+          <div class="footer-subscribe-row">
+            <input type="email" placeholder="Enter email address" aria-label="Email address" />
+            <button type="button">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Watermark -->
+  <div class="footer-watermark" aria-hidden="true">
+    <svg id="watermarkSvg" viewBox="0 0 1150 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <text id="watermarkText" x="575" y="95" text-anchor="middle" font-size="100">Hyperformance Media</text>
+    </svg>
+  </div>
+
+  <script>
+    /* --- Watermark auto-fit --- */
+    function fitWatermark() {
+      const svg = document.getElementById('watermarkSvg');
+      const text = document.getElementById('watermarkText');
+      if (!svg || !text) return;
+      try {
+        const bbox = text.getBBox();
+        svg.setAttribute('viewBox',
+          `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+      } catch (e) {}
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitWatermark);
+    } else {
+      window.addEventListener('load', fitWatermark);
+    }
+    window.addEventListener('resize', fitWatermark);
+
+    /* --- Smooth video loop + buffering --- */
+    (function() {
+      const video = document.getElementById('footer-video');
+      if (!video) return;
+
+      const fadeDuration = 0.45; // seconds of crossfade at loop point
+
+      // Wait for enough data buffered before playing to reduce stutter
+      function tryPlay() {
+        const buffered = video.buffered;
+        const duration = video.duration;
+        if (duration && buffered.length > 0) {
+          if (buffered.end(0) >= Math.min(2, duration)) {
+            video.play().catch(() => {});
+            return;
+          }
+        }
+        setTimeout(tryPlay, 200);
+      }
+
+      video.addEventListener('loadedmetadata', () => {
+        video.play().catch(() => {});
+        tryPlay();
+      });
+
+      if (video.readyState >= 1) {
+        tryPlay();
+      }
+
+      // Smooth crossfade loop using requestAnimationFrame
+      function updateOpacity() {
+        if (video.duration && !video.paused) {
+          const timeFromEnd = video.duration - video.currentTime;
+          const timeFromStart = video.currentTime;
+          let opacity = 1;
+
+          if (timeFromEnd < fadeDuration) {
+            opacity = Math.max(0, timeFromEnd / fadeDuration);
+          } else if (timeFromStart < fadeDuration) {
+            opacity = Math.min(1, timeFromStart / fadeDuration);
+          }
+
+          video.style.opacity = opacity.toFixed(3);
+        }
+        requestAnimationFrame(updateOpacity);
+      }
+      requestAnimationFrame(updateOpacity);
+
+      // Pause rendering when tab is hidden to save resources
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          video.pause();
+        } else {
+          video.play().catch(() => {});
+        }
+      });
+    })();
+  </script>
+</footer>
+
+<style>
+  /* =========================================================================
+     Footer — Kresna-inspired two-card layout
+     Fonts: Plus Jakarta Sans (headings/logo) + Inter (body/links/buttons)
+     Brand: Hyperformance Media, blue #2563eb
+     ========================================================================= */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .footer-section {
+    background: #ffffff;
+    padding: 48px 24px;
+    font-family: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #2d3148;
+  }
+
+  /* --- Wrapper: two-card grid --- */
+  .footer-wrapper {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  /* --- LEFT CARD --- */
+  .footer-left {
+    position: relative;
+    min-height: 340px;
+    min-width: 0;
+    border-radius: 28px;
+    padding: 32px;
+    overflow: hidden;
+    background: #1e4fc0;
+    box-shadow: 0 12px 40px rgba(21, 76, 189, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .footer-left-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  /* --- Logo --- */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-logo-name {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  /* --- Tagline --- */
+  .footer-tagline-container {
+    margin-top: auto;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-tagline {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: white;
+    line-height: 1.45;
+  }
+
+  .footer-tagline span {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* --- Social row --- */
+  .footer-social-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-social-label {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.3px;
+  }
+
+  .footer-social-icons {
+    display: flex;
+    gap: 7px;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #0e1014;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+
+  .social-icon svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+  }
+
+  .social-icon:hover {
+    background: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* --- RIGHT CARD --- */
+  .footer-right {
+    background: #f0f1f5;
+    border-radius: 28px;
+    padding: 40px;
+    overflow: visible;
+    min-width: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  /* --- Floating "Feeling ambitious?" badge --- */
+  .footer-lucky-graphic {
+    position: absolute;
+    top: -36px;
+    right: 40px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .lucky-cube {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    transform: rotate(-10deg);
+    background: linear-gradient(135deg, #5b9ffb 0%, #1e5dd7 55%, #1448be 100%);
+    box-shadow:
+      inset 3px 3px 8px rgba(255, 255, 255, 0.35),
+      inset -3px -3px 12px rgba(0, 0, 0, 0.18),
+      8px 14px 28px rgba(20, 72, 200, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lucky-cube-mark {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.04em;
+    transform: rotate(10deg);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    line-height: 1;
+  }
+
+  .lucky-text-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    transform: rotate(-4deg);
+    margin-top: 4px;
+  }
+
+  .lucky-arrow {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    color: #9ca3af;
+  }
+
+  .lucky-arrow svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .lucky-arrow svg path {
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lucky-text {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+
+  /* --- Nav columns --- */
+  .footer-right-top {
+    padding-top: 8px;
+  }
+
+  .footer-nav-cols {
+    display: flex;
+    gap: 72px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-col-title {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #9ca3af;
+    margin-bottom: 18px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-family: 'Inter Variable', 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: #1f65d6;
+  }
+
+  /* --- Bottom row --- */
+  .footer-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 48px;
+  }
+
+  .footer-copyright {
+    font-family: 'Inter Variable', 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #9ca3af;
+  }
+
+  .footer-cta-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .footer-cta-mini h4 {
+    font-family: 'Inter Variable', 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.45;
+  }
+
+  .footer-cta-mini h4 strong {
+    display: block;
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  /* --- Subscribe row --- */
+  .footer-subscribe-row {
+    display: flex;
+    width: 310px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  .footer-subscribe-row input {
+    flex: 1;
+    padding: 11px 14px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Inter Variable', 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: #111827;
+  }
+
+  .footer-subscribe-row input::placeholder {
+    color: #9ca3af;
+  }
+
+  .footer-subscribe-row button {
+    padding: 11px 22px;
+    background: #111214;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter Variable', 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+
+  .footer-subscribe-row button:hover {
+    background: #000;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* --- Watermark --- */
+  .footer-watermark {
+    max-width: 1150px;
+    margin: -60px auto 0;
+    pointer-events: none;
+    user-select: none;
+    position: relative;
+    z-index: 0;
+    line-height: 0;
+  }
+
+  .footer-watermark svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .footer-watermark text {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    fill: rgba(0, 0, 0, 0.04);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 860px) {
+    .footer-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .footer-left {
+      min-height: auto;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-right {
+      padding: 24px;
+    }
+    .footer-nav-cols {
+      gap: 40px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .footer-subscribe-row {
+      width: 100%;
+    }
+    .footer-lucky-graphic {
+      right: 12px;
+      top: -28px;
+    }
+    .lucky-cube {
+      width: 72px;
+      height: 72px;
+    }
+    .lucky-cube-mark {
+      font-size: 32px;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Mission from '../components/Mission.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Process from '../components/Process.astro';
+import Stats from '../components/Stats.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FinalCta from '../components/FinalCta.astro';
+
+// LocalBusiness / MarketingAgency structured data for SEO
+// TODO: Add real Facebook/Instagram profile URLs to sameAs when available.
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'MarketingAgency',
+	name: 'Hyperformance Media',
+	description: 'AI-powered digital marketing agency in Delhi offering SEO, website development, social media management, performance marketing, and CRM/app development.',
+	url: 'https://hyperformancemedia.in',
+	telephone: '+91-9643534849',
+	email: 'info@hyperformancemedia.in',
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Delhi',
+		addressCountry: 'IN',
+	},
+	sameAs: [], // Add real social profile URLs here when available
+};
+---
+<BaseLayout
+	title="Hyperformance Media | AI Digital Marketing Agency Delhi"
+	description="AI-powered digital marketing agency in Delhi offering SEO, web development, social media, and performance marketing. Book your free strategy call."
+	path="/"
+>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	<Hero />
+	<Mission />
+	<WhyUs />
+	<Process />
+	<Stats />
+	<Testimonials />
+	<FinalCta />
+</BaseLayout>
