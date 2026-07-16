@@ -1,19 +1,76 @@
 ---
-// Mission section — centered single block, white background
+import { Image } from 'astro:assets';
+import missionGraphic from '../assets/mission-graphic.jpg';
 ---
-<section class="bg-background px-6 py-20 md:py-28">
-  <div class="mx-auto max-w-3xl text-center">
-    <span class="inline-flex items-center rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary" data-reveal="fade">
-      <span class="inline-block h-2 w-2 rounded-full bg-primary" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
-      Our Mission
-    </span>
-    <h2 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">
-      Empowering Brands Through Digital Marketing.
-    </h2>
-    <p class="mx-auto mt-6 max-w-3xl text-body-lg text-text-secondary" data-reveal data-reveal-delay="2">
-      We bridge the gap between traditional marketing and modern digital strategy —
-      combining SEO, website building, performance marketing, and social media
-      optimization to help businesses grow online with measurable, lasting results.
-    </p>
+
+<section class="relative overflow-hidden bg-background px-6 py-20 md:py-28">
+  <!-- Subtle background glow -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[100px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      
+      <!-- Graphic Side -->
+      <div class="order-2 lg:order-1 relative" data-reveal="scale">
+        <div class="relative aspect-square w-full max-w-md mx-auto lg:max-w-none">
+          <!-- Decorative ring behind image -->
+          <div class="absolute inset-0 rounded-full border border-primary/20 scale-105" style="animation: spin 30s linear infinite;"></div>
+          <div class="absolute inset-0 rounded-full border border-primary/10 scale-110" style="animation: spin 40s linear infinite reverse;"></div>
+          
+          <Image 
+            src={missionGraphic} 
+            alt="Hyperformance Media Mission and Energy" 
+            class="h-full w-full object-cover rounded-full shadow-2xl ring-1 ring-border/50 mix-blend-multiply dark:mix-blend-normal"
+            width={600}
+            height={600}
+          />
+        </div>
+      </div>
+
+      <!-- Text Side -->
+      <div class="order-1 lg:order-2 text-center lg:text-left">
+        <span class="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary shadow-sm" data-reveal="fade">
+          <span class="inline-block h-2 w-2 rounded-full bg-primary" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
+          Our Mission
+        </span>
+        
+        <h2 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">
+          Empowering Brands Through Digital Excellence.
+        </h2>
+        
+        <p class="mt-6 text-body-lg text-text-secondary" data-reveal data-reveal-delay="2">
+          We bridge the gap between traditional marketing and modern digital strategy. By 
+          combining SEO, robust website architecture, performance marketing, and social media 
+          optimization, we help businesses grow online with measurable, lasting results.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start" data-reveal data-reveal-delay="3">
+           <div class="flex items-center gap-2 text-body font-medium text-text-primary">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              Data-Driven
+           </div>
+           <div class="hidden sm:block h-1 w-1 rounded-full bg-border"></div>
+           <div class="flex items-center gap-2 text-body font-medium text-text-primary">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              AI-Powered
+           </div>
+           <div class="hidden sm:block h-1 w-1 rounded-full bg-border"></div>
+           <div class="flex items-center gap-2 text-body font-medium text-text-primary">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              Client-Focused
+           </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>

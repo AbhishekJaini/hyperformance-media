@@ -77,16 +77,17 @@ const hours = [
             </ul>
           </div>
 
-          <!-- Map placeholder (static styled block - Delhi, India) -->
-          <div class="relative flex h-48 items-center justify-center rounded-card border border-border bg-background shadow-card transition-all duration-300 hover:shadow-card-hover">
-            <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px); background-size: 24px 24px;"></div>
-            <div class="relative flex flex-col items-center gap-2 text-center">
-              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-              </svg>
-              <span class="text-body font-medium text-text-primary">Delhi, India</span>
-              <span class="text-body-sm text-text-secondary">Map integration coming soon</span>
-            </div>
+          <!-- Map integration (Delhi, India) -->
+          <div class="relative flex h-64 overflow-hidden rounded-card border border-border bg-background shadow-card transition-all duration-300 hover:shadow-card-hover hover:border-primary/30" data-reveal="scale" data-reveal-delay="3">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.0688975472278!3d28.52758200617607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1715694203649!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style="border:0; filter: grayscale(100%) invert(92%) contrast(1.1) brightness(0.9) sepia(100%) hue-rotate(180deg) saturate(3) brightness(0.8);" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
 
