@@ -1,25 +1,30 @@
 # Hyperformance Media
 
-Hyperformance Media is an AI-powered digital marketing agency based in Delhi, India, providing results-driven digital strategy, search engine optimization (SEO), custom website development, CRM/app development, performance marketing, and social media/influencer marketing solutions.
+> Hyperformance Media is an AI-powered digital marketing agency based in Delhi, India. We build SEO, web development, performance marketing, social media, CRM/app, and AI-driven growth solutions for small and medium businesses.
 
 ## Core Navigation
-- **Home** (https://hyperformancemedia.in/): Main landing page with hero, mission statement, why choose us, methodology/process, key agency statistics, testimonials, and final CTA.
-- **About** (https://hyperformancemedia.in/about): Company background, results-driven philosophy, core values (Results-Driven, Transparent, AI-Forward, Client-First), and leadership.
-- **Services** (https://hyperformancemedia.in/services): Full list of our 8 digital agency offerings.
-- **Contact** (https://hyperformancemedia.in/contact): Reach out for a free strategy audit. Delhi location map, business hours, and contact form.
+- [Home](https://hyperformancemedia.in/): Main landing page with hero, mission, why choose us, process, statistics, testimonials, and final CTA.
+- [About](https://hyperformancemedia.in/about): Company background, results-driven philosophy, core values, and leadership.
+- [Services](https://hyperformancemedia.in/services): Full list of digital agency offerings.
+- [Contact](https://hyperformancemedia.in/contact): Reach out for a free strategy call, contact form, business hours, and Delhi location map.
 
 ## Services Catalog
-1. **Website Development**: Mobile-optimized, digital-marketing-ready corporate and e-commerce websites.
-2. **Search Engine Optimisation (SEO)**: Sustainable strategies covering technical SEO, keyword research, on-page optimization, and city/state geo-targeting.
-3. **App / CRM Development**: Custom CRMs, workflow automation, and client business apps.
-4. **E-Commerce**: Full account management across Amazon, Flipkart, Meesho, and other marketplaces.
-5. **Next-Gen AI Modelling**: Advanced local SEO, city/state/country target rankings, competitor SWOT analysis.
-6. **Social Media Management**: Organic brand storytelling across Instagram, Facebook, LinkedIn, YouTube, and X.
-7. **Performance Marketing**: Revenue-focused paid ad campaigns across Google Ads, Meta Ads, and LinkedIn Ads.
-8. **Influencer Marketing**: Video collaborations and distributed AI-driven celebrity style video campaigns.
+- [Website Development](https://hyperformancemedia.in/services): Mobile-optimised, marketing-ready corporate and e-commerce websites.
+- [Search Engine Optimisation (SEO)](https://hyperformancemedia.in/services): Technical SEO, keyword research, on-page optimisation, and geo-targeting.
+- [App / CRM Development](https://hyperformancemedia.in/services): Custom CRMs, workflow automation, and client business apps.
+- [E-Commerce](https://hyperformancemedia.in/services): Marketplace account management for Amazon, Flipkart, Meesho, and more.
+- [Next-Gen AI Modelling](https://hyperformancemedia.in/services): Local SEO, competitor SWOT analysis, and advanced ranking strategies.
+- [Social Media Management](https://hyperformancemedia.in/services): Organic brand storytelling across Instagram, Facebook, LinkedIn, YouTube, and X.
+- [Performance Marketing](https://hyperformancemedia.in/services): Revenue-focused paid campaigns across Google Ads, Meta Ads, and LinkedIn Ads.
+- [Influencer Marketing](https://hyperformancemedia.in/services): Video collaborations and AI-driven distributed celebrity-style campaigns.
 
 ## Contact Information
 - **Phone**: +91-9643534849, +91-7503325365
 - **Email**: info@hyperformancemedia.in
 - **Location**: Delhi, India
 - **Business Hours**: Mon-Fri 9:00 AM - 6:00 PM, Sat 10:00 AM - 2:00 PM
+
+## Optional
+- [Terms and Conditions](https://hyperformancemedia.in/terms): Terms of use for the website and services.
+- [Privacy Policy](https://hyperformancemedia.in/privacy): How visitor and client data is collected, used, and protected.
+- [404](https://hyperformancemedia.in/404): Custom not-found page.

@@ -103,13 +103,14 @@ const contactSchema = {
         <!-- TODO: Wire form submission to a real handler (Formspree, Astro API route, etc.) -->
         <div class="rounded-card border border-border bg-background p-8 shadow-card transition-all duration-300 hover:shadow-card-hover" data-reveal="right">
           <h2 class="text-h3 text-text-primary">Send Us a Message</h2>
-          <form id="contact-form" class="mt-6 space-y-5" novalidate>
+          <form id="contact-form" class="mt-6 space-y-5" novalidate toolname="contact_hyperformance" tooldescription="Send a message to Hyperformance Media to request a free strategy call or ask about services.">
             <div>
               <label for="name" class="mb-1.5 block text-body-sm font-medium text-text-primary">Full Name</label>
               <input
                 type="text"
                 id="name"
                 name="name"
+                toolparamdescription="Full name of the person contacting us"
                 required
                 placeholder="Jane Doe"
                 class="w-full rounded-button border border-border bg-background px-4 py-3 text-body text-text-primary placeholder:text-text-secondary/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
@@ -122,6 +123,7 @@ const contactSchema = {
                   type="email"
                   id="email"
                   name="email"
+                  toolparamdescription="Email address for reply"
                   required
                   placeholder="jane@company.com"
                   class="w-full rounded-button border border-border bg-background px-4 py-3 text-body text-text-primary placeholder:text-text-secondary/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
@@ -133,6 +135,7 @@ const contactSchema = {
                   type="tel"
                   id="phone"
                   name="phone"
+                  toolparamdescription="Phone number with country code"
                   placeholder="+91-XXXXXXXXXX"
                   class="w-full rounded-button border border-border bg-background px-4 py-3 text-body text-text-primary placeholder:text-text-secondary/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                 />
@@ -143,6 +146,7 @@ const contactSchema = {
               <select
                 id="service"
                 name="service"
+                toolparamdescription="Service the user is interested in"
                 class="w-full rounded-button border border-border bg-background px-4 py-3 text-body text-text-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
               >
                 <option value="">Select a service...</option>
@@ -162,6 +166,7 @@ const contactSchema = {
               <textarea
                 id="message"
                 name="message"
+                toolparamdescription="Project details and goals"
                 rows="5"
                 required
                 placeholder="Tell us about your project and goals..."
