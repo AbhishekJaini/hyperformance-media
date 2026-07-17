@@ -22,6 +22,14 @@ const ogImageUrl = new URL(ogImage, SITE_URL).href;
 <!doctype html>
 <html lang="en">
 	<head>
+		<script>
+			// Check local storage or system preference to set theme before page loads (prevents FOUC)
+			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
