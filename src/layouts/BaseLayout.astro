@@ -13,7 +13,23 @@ const {
   description = 'AI-powered digital marketing agency in Delhi offering SEO, web development, social media, and performance marketing. Book your free strategy call.',
   path = '/',
   ogImage = '/og-image.png',
+  schema,
 } = Astro.props;
+
+const defaultSchema = schema || {
+  '@context': 'https://schema.org',
+  '@type': 'MarketingAgency',
+  name: SITE_NAME,
+  description: description,
+  url: new URL(path, SITE_URL).href,
+  telephone: '+91-9643534849',
+  email: 'info@hyperformancemedia.in',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Delhi',
+    addressCountry: 'IN',
+  },
+};
 
 const canonicalUrl = new URL(path, SITE_URL).href;
 const ogImageUrl = new URL(ogImage, SITE_URL).href;
@@ -54,11 +70,13 @@ const ogImageUrl = new URL(ogImage, SITE_URL).href;
 		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:site_name" content={SITE_NAME} />
 
-		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageUrl} />
+
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(defaultSchema)} />
 	</head>
 	<body class="min-h-screen flex flex-col">
 		<Navbar />

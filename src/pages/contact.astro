@@ -13,11 +13,19 @@ const hours = [
   { day: 'Saturday', time: '10:00 AM - 2:00 PM' },
   { day: 'Sunday', time: 'Closed' },
 ];
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Us | Hyperformance Media',
+  description: 'Get in touch with Hyperformance Media for a free digital marketing strategy call. Delhi-based, results-driven, AI-powered.',
+  url: 'https://hyperformancemedia.in/contact',
+};
 ---
 <BaseLayout
 	title="Contact Us | Hyperperformance Media"
 	description="Get in touch with Hyperformance Media for a free digital marketing strategy call. Delhi-based, results-driven, AI-powered."
 	path="/contact"
+	schema={contactSchema}
 >
   <!-- Intro block -->
   <section class="bg-background px-6 pt-32 pb-16 md:pt-40 md:pb-20">
