@@ -11,11 +11,11 @@
   /* -----------------------------------------------------------------------
      1. COLORS
      ----------------------------------------------------------------------- */
-  --color-primary: #00e5ff;        /* Vibrant cyan from client screenshot */
-  --color-primary-dark: #00b8cc;
-  --color-primary-light: #66f0ff;
-
   /* Theme-dependent variables (mapped to :root and .dark below) */
+  --color-primary: var(--theme-primary);
+  --color-primary-dark: var(--theme-primary-dark);
+  --color-primary-light: var(--theme-primary-light);
+  
   --color-background: var(--theme-background);
   --color-surface: var(--theme-surface);
   --color-text-primary: var(--theme-text-primary);
@@ -68,6 +68,10 @@
    THEMES (Light & Dark)
    =========================================================================== */
 :root {
+  --theme-primary: #2563eb;        /* Old blue */
+  --theme-primary-dark: #1d4ed8;
+  --theme-primary-light: #3b82f6;
+  
   --theme-background: #ffffff;
   --theme-surface: #f8f9fb;
   --theme-text-primary: #0f172a; /* Near black */
@@ -76,6 +80,10 @@
 }
 
 .dark {
+  --theme-primary: #00e5ff;        /* Cyan */
+  --theme-primary-dark: #00b8cc;
+  --theme-primary-light: #66f0ff;
+  
   --theme-background: #050b14; /* Deep dark blue/black from screenshot */
   --theme-surface: #0a1323;
   --theme-text-primary: #ffffff;

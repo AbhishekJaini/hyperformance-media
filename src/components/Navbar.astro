@@ -14,9 +14,9 @@ const navLinks = [
 ---
 <header id="site-header" class="sticky top-0 z-50 bg-background border-b border-border transition-all duration-300">
   <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 transition-all duration-300" aria-label="Main navigation">
-    <!-- Logo - horizontal lockup from brand assets -->
-    <a href="/" class="flex-shrink-0">
-      <Image src={logo} alt="Hyperformance Media logo" height={40} width={121} class="h-10 w-auto transition-all duration-300" id="nav-logo" />
+    <!-- Logo -->
+    <a href="/" class="flex-shrink-0 transition-transform duration-300" id="nav-logo">
+      <Image src={logo} alt="Hyperformance Media logo" height={56} width={170} class="h-14 w-auto" />
     </a>
 
     <!-- Desktop nav links -->
@@ -121,11 +121,12 @@ const navLinks = [
       requestAnimationFrame(() => {
         const scrolled = window.scrollY > 20;
         if (scrolled) {
-          header.style.boxShadow = '0 4px 20px rgba(15, 23, 42, 0.06)';
-          header.style.borderColor = '#e2e8f0';
+          header.style.boxShadow = document.documentElement.classList.contains('dark') ? '0 4px 20px rgba(0, 0, 0, 0.5)' : '0 4px 20px rgba(15, 23, 42, 0.06)';
+          header.style.borderColor = 'transparent'; // Let the shadow do the work, or use a specific dark mode border
           if (logo) logo.style.transform = 'scale(0.9)';
         } else {
           header.style.boxShadow = '';
+          header.style.borderColor = '';
           if (logo) logo.style.transform = 'scale(1)';
         }
         ticking = false;
