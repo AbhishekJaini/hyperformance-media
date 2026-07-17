@@ -1,5 +1,6 @@
 /* stylelint-disable at-rule-no-unknown -- Tailwind CSS v4 at-rules (@theme, @import) are valid */
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ===========================================================================
    Hyperformance Media — Design Token System
@@ -68,9 +69,9 @@
    THEMES (Light & Dark)
    =========================================================================== */
 :root {
-  --theme-primary: #2563eb;        /* Old blue */
-  --theme-primary-dark: #1d4ed8;
-  --theme-primary-light: #3b82f6;
+  --theme-primary: #00e5ff;        /* Cyan accent from mockup */
+  --theme-primary-dark: #00b8cc;
+  --theme-primary-light: #66f0ff;
   
   --theme-background: #ffffff;
   --theme-surface: #f8f9fb;
