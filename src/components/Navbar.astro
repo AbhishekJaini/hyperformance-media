@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import logoHeader from '../assets/logo-header.png';
+import logoHeaderDark from '../assets/logo-header-dark.png';
+
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
@@ -10,8 +14,8 @@ const navLinks = [
   <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 transition-all duration-300" aria-label="Main navigation">
     <!-- Logo -->
     <a href="/" class="flex flex-shrink-0 items-center" id="nav-logo">
-      <img src="/logo-header.png" alt="Hyperformance Media logo" width="1491" height="490" class="block h-12 w-auto object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 md:h-16 dark:hidden" />
-      <img src="/logo-header-dark.png" alt="Hyperformance Media logo" width="471" height="129" class="hidden h-12 w-auto object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 md:h-16 dark:block" />
+      <Image src={logoHeader} alt="Hyperformance Media logo" class="block h-12 w-auto object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 md:h-16 dark:hidden" />
+      <Image src={logoHeaderDark} alt="Hyperformance Media logo" class="hidden h-12 w-auto object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 md:h-16 dark:block" />
     </a>
 
     <!-- Desktop nav links -->
