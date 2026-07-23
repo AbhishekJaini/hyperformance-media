@@ -1,0 +1,25 @@
+---
+// Wraps card content in the CSS-only `.hover-3d` tilt effect (see global.css) —
+// the pointer-direction rotation, shine and shadow all run in CSS via
+// `:has()`, no JS. The slotted content must be a single element; it becomes
+// `.hover-3d`'s first child, which is what the tilt CSS targets. `group` is
+// applied here (not on the slotted card) because the 8 tilt-zone divs stack
+// above the card and would otherwise swallow :hover before it reaches it.
+interface Props {
+  revealDelay?: number;
+}
+const { revealDelay } = Astro.props;
+---
+<div data-reveal="scale" data-reveal-delay={revealDelay} class="h-full">
+  <div class="hover-3d group h-full w-full">
+    <slot />
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+    <div aria-hidden="true"></div>
+  </div>
+</div>

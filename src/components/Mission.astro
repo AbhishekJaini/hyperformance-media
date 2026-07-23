@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import missionGraphic from '../assets/mission-graphic.jpg';
+import missionGraphicDark from '../assets/mission-graphic-dark.png';
 ---
 
 <section class="relative overflow-hidden bg-background px-6 py-20 md:py-28">
@@ -23,7 +24,14 @@ import missionGraphic from '../assets/mission-graphic.jpg';
           <Image 
             src={missionGraphic} 
             alt="Hyperformance Media Mission and Energy" 
-            class="h-full w-full object-cover rounded-full shadow-2xl ring-1 ring-border/50 mix-blend-multiply dark:mix-blend-normal"
+            class="h-full w-full rounded-full object-cover shadow-2xl ring-1 ring-border/50 mix-blend-multiply dark:hidden"
+            width={600}
+            height={600}
+          />
+          <Image
+            src={missionGraphicDark}
+            alt="Hyperformance Media Mission and Energy"
+            class="hidden h-full w-full rounded-full object-cover shadow-[0_24px_64px_rgb(0_229_255_/_0.12)] ring-1 ring-primary/30 dark:block"
             width={600}
             height={600}
           />
@@ -32,19 +40,13 @@ import missionGraphic from '../assets/mission-graphic.jpg';
 
       <!-- Text Side -->
       <div class="order-1 lg:order-2 text-center lg:text-left">
-        <span class="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary shadow-sm" data-reveal="fade">
-          <span class="inline-block h-2 w-2 rounded-full bg-primary" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
-          Our Mission
-        </span>
-        
+
         <h2 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">
-          Empowering Brands Through Digital Excellence.
+          Translating traffic into tangible revenue.
         </h2>
         
         <p class="mt-6 text-body-lg text-text-secondary" data-reveal data-reveal-delay="2">
-          We bridge the gap between traditional marketing and modern digital strategy. By 
-          combining SEO, robust website architecture, performance marketing, and social media 
-          optimization, we help businesses grow online with measurable, lasting results.
+          Most agencies optimize for clicks. We engineer for revenue. By fusing technical SEO, high-performance website architecture, and precision media buying, we build sustainable acquisition engines that compound over time.
         </p>
 
         <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start" data-reveal data-reveal-delay="3">

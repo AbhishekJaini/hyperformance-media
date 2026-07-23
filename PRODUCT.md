@@ -37,7 +37,7 @@ Bold, energetic, tech-forward — but the emotional target is trust and relief. 
 - **Generic agency template look.** Stock photos of people pointing at laptops, blue gradient heroes, "we are passionate about what we do" copy, trust badges, the same 4-card "our services" grid every agency has. If someone could guess it's an agency site from the layout alone, it's failed.
 - **Stiff corporate / enterprise vendor.** Feels like a B2B SaaS company, not a modern marketing partner. Jargon-heavy, cold, impersonal.
 - **Cheap / cluttered / spammy.** Popups, aggressive chat widgets, "BEST AGENCY IN DELHI" energy, trust badges everywhere.
-- **Style-over-substance design agency.** Looks cool but you can't tell what they actually do. Dark mode for no reason, unreadable thin fonts, motion that delays content.
+- **Style-over-substance design agency.** Looks cool but you can't tell what they actually do. Visual flourishes disconnected from substance, unreadable thin fonts, motion that delays content.
 
 ## Design Principles
 

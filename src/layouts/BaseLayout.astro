@@ -1,9 +1,10 @@
 ---
-import '@fontsource-variable/inter';
-import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/manrope';
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import FloatingContactActions from '../components/FloatingContactActions.astro';
 
 const SITE_URL = 'https://hyperformancemedia.in';
 const SITE_NAME = 'Hyperformance Media';
@@ -39,19 +40,16 @@ const ogImageUrl = new URL(ogImage, SITE_URL).href;
 <html lang="en">
 	<head>
 		<script>
-			// Check local storage or system preference to set theme before page loads (prevents FOUC)
-			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-				document.documentElement.classList.add('dark');
-			} else {
-				document.documentElement.classList.remove('dark');
-			}
+			// Dark is the intentional default. A visitor's explicit choice remains persistent.
+			if (localStorage.theme !== 'light') document.documentElement.classList.add('dark');
+			else document.documentElement.classList.remove('dark');
 		</script>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Primary Meta Tags -->
@@ -84,6 +82,7 @@ const ogImageUrl = new URL(ogImage, SITE_URL).href;
 			<slot />
 		</main>
 		<Footer />
+		<FloatingContactActions />
 	</body>
 	<script>
 		// Scroll reveal — IntersectionObserver toggles .is-visible on [data-reveal]

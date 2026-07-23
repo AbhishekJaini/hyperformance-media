@@ -26,8 +26,8 @@
   /* -----------------------------------------------------------------------
      2. TYPOGRAPHY
      ----------------------------------------------------------------------- */
-  --font-heading: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --text-h1: 4rem;
   --text-h1--line-height: 1.05;
@@ -63,6 +63,10 @@
 
   --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.06), 0 1px 2px -1px rgb(15 23 42 / 0.06);
   --shadow-card-hover: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 2px 6px -2px rgb(15 23 42 / 0.06);
+
+  /* Glass / frosted card variant — tuned for the dark theme surface */
+  --shadow-glass: 0 8px 30px -10px rgb(0 0 0 / 0.55), 0 2px 8px -3px rgb(0 0 0 / 0.4);
+  --shadow-glass-hover: 0 24px 50px -14px rgb(0 229 255 / 0.16), 0 10px 28px -10px rgb(0 0 0 / 0.55);
 }
 
 /* ===========================================================================
@@ -102,6 +106,168 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: clip;
+}
+
+img, svg { max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ===========================================================================
+   Glass Card — frosted, translucent surface for card grids
+   Tuned for the dark theme (default), with a clean light-theme fallback.
+   Applies its own background, border tint, sheen and shadow, so drop the
+   bg/border/shadow utilities from the element and keep `rounded-card border`.
+   Hover state is driven by the ancestor .hover-3d wrapper (see below), not
+   this element's own :hover — the 8 tilt-zone divs sit on top of it and
+   would otherwise swallow the pointer.
+   Deliberately no `backdrop-filter` here — blurring the backdrop of every
+   card while its ancestor animates in via scroll-reveal forces a live
+   backdrop resample on every frame, which is what caused the section-enter
+   jank. The gradient + border + shadow alone still read as "glass".
+   =========================================================================== */
+.glass-card {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(155deg, rgb(255 255 255 / 0.85), rgb(248 249 251 / 0.65));
+  border-color: rgb(15 23 42 / 0.08);
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgb(255 255 255 / 0.7);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Faint top-edge sheen that lifts the panel off the background. */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at 50% 0%, rgb(0 229 255 / 0.06), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.hover-3d:hover .glass-card {
+  border-color: rgb(0 229 255 / 0.4);
+  box-shadow: var(--shadow-card-hover), inset 0 1px 0 rgb(255 255 255 / 0.7);
+}
+
+.hover-3d:hover .glass-card::after { opacity: 1; }
+
+/* Dark theme: translucent panel over the deep background. Opacity bumped up
+   slightly from the original blurred version to keep the frosted read now
+   that there's no backdrop-filter doing the work. */
+.dark .glass-card {
+  background: linear-gradient(155deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.025));
+  border-color: rgb(255 255 255 / 0.09);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+.dark .hover-3d:hover .glass-card {
+  border-color: rgb(0 229 255 / 0.38);
+  box-shadow: var(--shadow-glass-hover), inset 0 1px 0 rgb(255 255 255 / 0.14);
+}
+
+/* ===========================================================================
+   Hover 3D — CSS-only pointer-direction tilt (no JS)
+   Structure: a `.hover-3d` wrapper whose first child is the visible card and
+   whose next 8 children are empty divs, each covering one of the 8
+   surrounding thirds of a 3x3 grid (the center cell is left uncovered).
+   `:has(> :nth-child(N):hover)` reads which zone the pointer is over and
+   sets --tilt-transform/--tilt-shine accordingly, so the card rotates toward
+   whichever edge or corner the cursor approaches from. See TiltCard.astro,
+   which renders this structure so callers don't hand-write the 8 divs.
+   No `filter` here on purpose — a multi-layer drop-shadow() filter that
+   recomputes every frame while the card's ancestor animates in via
+   scroll-reveal was the other big contributor to the section-enter jank.
+   The hover "lift" comes from .glass-card's plain box-shadow instead, which
+   is a cheap geometric shadow rather than a rasterized filter pass.
+   =========================================================================== */
+.hover-3d {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  perspective: 75rem;
+  --tilt-transform: 0, 0;
+  --tilt-shine: 100% 100%;
+  --tilt-ease: linear(0, .931 13.8%, 1.196 21.4%, 1.343 29.8%, 1.378 36%, 1.365 43.2%, 1.059 78%, 1);
+}
+
+.hover-3d > :first-child {
+  grid-area: 1 / 1 / 4 / 4;
+  overflow: hidden;
+  transform: rotate3d(var(--tilt-transform), 0, 10deg);
+  transition: transform var(--tilt-ease) 0.5s, scale var(--tilt-ease) 0.5s, outline-color 0.5s ease-out;
+  outline: 0.5px solid transparent;
+  outline-offset: -1px;
+  will-change: transform;
+}
+
+/* Radial shine that slides toward the hovered edge/corner. */
+.hover-3d > :first-child::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 33.3333%;
+  height: 33.3333%;
+  scale: 5;
+  translate: var(--tilt-shine);
+  background-image: radial-gradient(circle, rgb(255 255 255 / 0.2) 10%, transparent 50%);
+  filter: blur(0.75rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: translate 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+.hover-3d:hover {
+  --tilt-ease: linear(0, .708 15.2%, .927 23.6%, 1.067 33%, 1.12 41%, 1.13 50.2%, 1.019 83.2%, 1);
+}
+
+.hover-3d:hover > :first-child {
+  scale: 1.05;
+  outline-color: rgb(255 255 255 / 0.1);
+}
+
+.hover-3d:hover > :first-child::before {
+  opacity: 1;
+}
+
+/* The 8 tilt-zone divs — invisible, stacked above the card, one per octant. */
+.hover-3d > :nth-child(n + 2) {
+  isolation: isolate;
+  z-index: 2;
+  scale: 1.2;
+}
+
+.hover-3d > :nth-child(2) { grid-area: 1 / 1 / 2 / 2; }
+.hover-3d > :nth-child(3) { grid-area: 1 / 2 / 2 / 3; }
+.hover-3d > :nth-child(4) { grid-area: 1 / 3 / 2 / 4; }
+.hover-3d > :nth-child(5) { grid-area: 2 / 1 / 3 / 2; }
+.hover-3d > :nth-child(6) { grid-area: 2 / 3 / 3 / 4; }
+.hover-3d > :nth-child(7) { grid-area: 3 / 1 / 4 / 2; }
+.hover-3d > :nth-child(8) { grid-area: 3 / 2 / 4 / 3; }
+.hover-3d > :nth-child(9) { grid-area: 3 / 3 / 4 / 4; }
+
+.hover-3d:has(> :nth-child(2):hover) { --tilt-transform: -1, 1;  --tilt-shine: 0% 0%; }
+.hover-3d:has(> :nth-child(3):hover) { --tilt-transform: -1, 0;  --tilt-shine: 100% 0%; }
+.hover-3d:has(> :nth-child(4):hover) { --tilt-transform: -1, -1; --tilt-shine: 200% 0%; }
+.hover-3d:has(> :nth-child(5):hover) { --tilt-transform: 0, 1;   --tilt-shine: 0% 100%; }
+.hover-3d:has(> :nth-child(6):hover) { --tilt-transform: 0, -1;  --tilt-shine: 200% 100%; }
+.hover-3d:has(> :nth-child(7):hover) { --tilt-transform: 1, 1;   --tilt-shine: 0% 200%; }
+.hover-3d:has(> :nth-child(8):hover) { --tilt-transform: 1, 0;   --tilt-shine: 100% 200%; }
+.hover-3d:has(> :nth-child(9):hover) { --tilt-transform: 1, -1;  --tilt-shine: 200% 200%; }
+
+/* Browsers without :has() support (or reduced-motion users) just keep the
+   flat card — no broken half-applied tilt state. */
+@media (prefers-reduced-motion: reduce) {
+  .hover-3d > :first-child, .hover-3d > :first-child::before {
+    transition: none;
+  }
 }
 
 h1, h2, h3, h4 {

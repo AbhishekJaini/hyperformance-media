@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoVerticalTransparent from '../assets/logo-vertical-transparent.png';
+import lightHeroLogo from '../assets/logo-hero-light-transparent.png';
 
 // Marquee items
 const marqueeItems = [
@@ -38,32 +39,32 @@ const marqueeItems = [
       <!-- Left side: Text content -->
       <div class="max-w-2xl text-left">
         <!-- Eyebrow / label -->
-        <span class="inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-text-secondary" data-reveal="fade">
+        <span class="hero-item-gsap inline-flex items-center gap-2 rounded-full border border-border bg-transparent px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-text-secondary opacity-0 -translate-y-4">
           <svg class="h-3.5 w-3.5 text-primary" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
           </svg>
-          AI-Powered Digital Marketing
+          Data-Driven Growth Agency
         </span>
 
         <!-- Headline -->
-        <h1 class="mt-8 text-5xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-6xl md:text-[4.5rem]" data-reveal data-reveal-delay="1">
-          Accelerate growth<br />
-          <span class="text-primary">with Next-Gen</span><br />
-          AI marketing.
+        <h1 class="hero-item-gsap mt-8 text-[clamp(2.2rem,9vw,4.5rem)] font-extrabold leading-[1.04] tracking-tight text-text-primary opacity-0 translate-y-8">
+          Engineering growth<br />
+          <span class="text-primary">that scales</span><br />
+          predictably.
         </h1>
 
         <!-- Subtext -->
-        <p class="mt-8 max-w-xl text-lg leading-relaxed text-text-secondary" data-reveal data-reveal-delay="2">
-          Hyperformance Media builds intelligent portals, websites, apps and campaigns that learn your market and compound your growth — engineered in Delhi, deployed everywhere.
+        <p class="hero-item-gsap mt-8 max-w-xl text-lg leading-relaxed text-text-secondary opacity-0 translate-y-8">
+          We don't just run campaigns. We build robust digital infrastructure—high-converting funnels, fast websites, and precise SEO—that turns traffic into measurable revenue.
         </p>
 
         <!-- CTAs -->
-        <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center" data-reveal data-reveal-delay="3">
+        <div class="hero-item-gsap mt-8 flex flex-col gap-4 sm:flex-row sm:items-center opacity-0 translate-y-8">
           <a
             href="/contact"
             class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-body font-bold text-black shadow-card transition-all duration-300 hover:bg-primary-light hover:shadow-lg sm:w-auto"
           >
-            Start your project
+            Scale your revenue
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 19L20 5M20 5v10M20 5H10" />
             </svg>
@@ -72,24 +73,29 @@ const marqueeItems = [
             href="/services"
             class="inline-flex w-full items-center justify-center rounded-full border border-border bg-surface dark:bg-transparent px-8 py-3.5 text-body font-medium text-text-primary transition-all duration-300 hover:border-primary hover:text-primary sm:w-auto"
           >
-            Explore services
+            See our process
           </a>
         </div>
       </div>
 
       <!-- Right side: Concentric Circles & Floating Logo -->
-      <div class="relative mx-auto flex h-[500px] w-full max-w-lg items-center justify-center lg:mx-0 lg:max-w-none" data-reveal="fade" data-reveal-delay="3">
+      <div class="hero-graphic-gsap relative mx-auto flex h-[min(82vw,500px)] w-full max-w-lg items-center justify-center lg:mx-0 lg:max-w-none opacity-0 scale-95">
         
         <!-- Concentric rings (Centered explicitly) -->
-        <div class="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20 bg-transparent shadow-[inset_0_0_80px_rgba(0,229,255,0.05)]"></div>
-        <div class="absolute left-1/2 top-1/2 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10 bg-transparent"></div>
+        <div class="absolute left-1/2 top-1/2 h-[min(64vw,400px)] w-[min(64vw,400px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20 bg-transparent shadow-[inset_0_0_80px_theme(colors.primary/5%)]"></div>
+        <div class="absolute left-1/2 top-1/2 h-[min(88vw,550px)] w-[min(88vw,550px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10 bg-transparent"></div>
         
-        <!-- Floating Logo: vertical transparent logo for both themes -->
+        <!-- Theme-specific assets retain contrast and clean edges on both surfaces. -->
         <div class="relative z-10 flex items-center justify-center" style="animation: float-random 10s ease-in-out infinite;">
           <Image 
+            src={lightHeroLogo}
+            alt="Hyperformance Media"
+            class="h-auto w-48 object-contain drop-shadow-[0_0_36px_theme(colors.primary/20%)] dark:hidden sm:w-56 md:w-80"
+          />
+          <Image
             src={logoVerticalTransparent} 
             alt="Hyperformance Media" 
-            class="w-64 h-auto object-contain drop-shadow-[0_0_60px_rgba(0,229,255,0.3)] md:w-80"
+            class="hidden h-auto w-48 object-contain drop-shadow-[0_0_60px_theme(colors.primary/30%)] dark:block sm:w-56 md:w-80"
           />
         </div>
       </div>
@@ -101,7 +107,7 @@ const marqueeItems = [
   <div class="absolute bottom-0 left-0 w-full overflow-hidden bg-primary py-5">
     <div class="flex whitespace-nowrap" style="animation: marquee 20s linear infinite;">
       {marqueeItems.map((item) => (
-        <span class="mx-4 text-2xl font-black uppercase tracking-widest text-[#000000]">
+        <span class="mx-4 text-2xl font-black uppercase tracking-widest text-black">
           {item}
         </span>
       ))}
@@ -114,3 +120,28 @@ const marqueeItems = [
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+  
+  if (typeof window !== 'undefined') {
+    // Staggered entrance for the left content
+    gsap.to(".hero-item-gsap", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power4.out",
+      delay: 0.2
+    });
+    
+    // Scale and fade in the graphic side
+    gsap.to(".hero-graphic-gsap", {
+      opacity: 1,
+      scale: 1,
+      duration: 1.5,
+      ease: "power3.out",
+      delay: 0.6
+    });
+  }
+</script>

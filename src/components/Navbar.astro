@@ -1,20 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logo-official.png';
-
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
-  { label: 'Why Us', href: '/#why-us' },
   { label: 'Contact', href: '/contact' },
 ];
 ---
 <header id="site-header" class="sticky top-0 z-50 bg-background border-b border-border transition-all duration-300">
   <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 transition-all duration-300" aria-label="Main navigation">
     <!-- Logo -->
-    <a href="/" class="flex-shrink-0 transition-transform duration-300" id="nav-logo">
-      <Image src={logo} alt="Hyperformance Media logo" height={56} width={170} class="h-14 w-auto" />
+    <a href="/" class="flex flex-shrink-0 items-center" id="nav-logo">
+      <img src="/logo-header.png" alt="Hyperformance Media logo" width="205" height="68" class="block h-12 w-[145px] object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 sm:w-[175px] md:h-16 md:w-[205px] dark:hidden" />
+      <img src="/logo-header-dark.png" alt="Hyperformance Media logo" width="205" height="68" class="hidden h-12 w-[145px] object-contain [image-rendering:-webkit-optimize-contrast] sm:h-14 sm:w-[175px] md:h-16 md:w-[205px] dark:block" />
     </a>
 
     <!-- Desktop nav links -->
@@ -35,15 +32,16 @@ const navLinks = [
     <div class="hidden md:flex items-center gap-4">
       <button
         id="theme-toggle"
+        data-theme-toggle
         class="flex h-10 w-10 items-center justify-center rounded-full border border-border text-text-secondary transition-colors hover:border-primary hover:text-primary"
         aria-label="Toggle dark mode"
       >
         <!-- Sun icon (shows in dark mode) -->
-        <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="theme-toggle-light-icon" data-theme-light-icon class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
         <!-- Moon icon (shows in light mode) -->
-        <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="theme-toggle-dark-icon" data-theme-dark-icon class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       </button>
@@ -58,19 +56,34 @@ const navLinks = [
       </a>
     </div>
 
-    <!-- Mobile hamburger button -->
-    <button
-      id="nav-toggle"
-      type="button"
-      class="md:hidden inline-flex items-center justify-center rounded-button p-2 text-text-primary hover:bg-surface"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="nav-mobile"
-    >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+    <!-- Mobile controls retain access to both navigation and colour preference. -->
+    <div class="flex items-center gap-2 md:hidden">
+      <button
+        type="button"
+        data-theme-toggle
+        class="flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-secondary transition-colors hover:border-primary hover:text-primary"
+        aria-label="Toggle dark mode"
+      >
+        <svg data-theme-light-icon class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l.707.707M17.657 17.657l.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg data-theme-dark-icon class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+      <button
+        id="nav-toggle"
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-primary transition-colors hover:border-primary hover:bg-surface"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile slide-down menu -->
@@ -110,7 +123,6 @@ const navLinks = [
 
   // Navbar scroll shrink — reduces padding + adds stronger shadow when scrolled
   const header = document.getElementById('site-header');
-  const logo = document.getElementById('nav-logo');
   if (header) {
     let ticking = false;
     function onScroll() {
@@ -121,11 +133,9 @@ const navLinks = [
         if (scrolled) {
           header.style.boxShadow = document.documentElement.classList.contains('dark') ? '0 4px 20px rgba(0, 0, 0, 0.5)' : '0 4px 20px rgba(15, 23, 42, 0.06)';
           header.style.borderColor = 'transparent'; // Let the shadow do the work, or use a specific dark mode border
-          if (logo) logo.style.transform = 'scale(0.9)';
         } else {
           header.style.boxShadow = '';
           header.style.borderColor = '';
-          if (logo) logo.style.transform = 'scale(1)';
         }
         ticking = false;
       });
@@ -134,29 +144,22 @@ const navLinks = [
   }
 
   // Theme toggle logic
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const darkIcon = document.getElementById('theme-toggle-dark-icon');
-  const lightIcon = document.getElementById('theme-toggle-light-icon');
+  const themeToggleBtns = document.querySelectorAll<HTMLElement>('[data-theme-toggle]');
 
-  if (themeToggleBtn) {
-    // Initial icon state
-    if (document.documentElement.classList.contains('dark')) {
-      lightIcon?.classList.remove('hidden');
-    } else {
-      darkIcon?.classList.remove('hidden');
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      if (document.documentElement.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
-        darkIcon?.classList.add('hidden');
-        lightIcon?.classList.remove('hidden');
-      } else {
-        localStorage.setItem('theme', 'light');
-        lightIcon?.classList.add('hidden');
-        darkIcon?.classList.remove('hidden');
-      }
+  function syncThemeToggles() {
+    const isDark = document.documentElement.classList.contains('dark');
+    themeToggleBtns.forEach((button) => {
+      button.querySelector('[data-theme-dark-icon]')?.classList.toggle('hidden', isDark);
+      button.querySelector('[data-theme-light-icon]')?.classList.toggle('hidden', !isDark);
     });
   }
+
+  syncThemeToggles();
+  themeToggleBtns.forEach((button) => {
+    button.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      syncThemeToggles();
+    });
+  });
 </script>

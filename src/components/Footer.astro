@@ -1,7 +1,7 @@
 ---
 // Footer — two-card layout inspired by the Kresna footer design
-// Adapted for Hyperformance Media: brand fonts (Plus Jakarta Sans + Inter),
-// brand blue (#2563eb), real nav links, Facebook + Instagram socials.
+// Adapted for Hyperformance Media: brand fonts (Bricolage Grotesque + Manrope),
+// brand blue (var(--theme-primary)), real nav links, Facebook + Instagram socials.
 // No Caveat/handwritten font — uses the project's own type system.
 // TODO: Subscribe form is UI-only — wire to a real handler (Formspree, API route, etc.)
 // TODO: Replace social URLs with real profile links when available.
@@ -41,7 +41,7 @@ const socials = [
     <!-- LEFT CARD: dark brand panel with video background -->
     <div class="footer-left">
       <!-- Video background -->
-      <video class="footer-left-video" muted loop playsinline preload="auto" aria-hidden="true" id="footer-video">
+      <video class="footer-left-video" muted loop playsinline preload="metadata" aria-hidden="true" id="footer-video">
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4" />
       </video>
 
@@ -159,60 +159,50 @@ const socials = [
     }
     window.addEventListener('resize', fitWatermark);
 
-    /* --- Smooth video loop + buffering --- */
-    (function() {
+    /* --- Footer video: lazy-start near viewport, retry autoplay, no per-frame JS ---
+       Previous version drove opacity from a requestAnimationFrame loop that ran
+       forever on every page (footer is site-wide) and only revealed the video
+       while `!video.paused` — so any autoplay hiccup (blocked, slow CDN, tab
+       backgrounded) left it stuck at its initial opacity: 0, showing nothing but
+       the panel's background color. This version reveals on the real `playing`
+       event via a CSS transition, retries a few times if play() is rejected, and
+       doesn't start loading/playing until the footer is about to scroll into
+       view, so it isn't competing for bandwidth on initial page load either. */
+    (function () {
       const video = document.getElementById('footer-video');
       if (!video) return;
 
-      const fadeDuration = 0.45; // seconds of crossfade at loop point
-
-      // Wait for enough data buffered before playing to reduce stutter
-      function tryPlay() {
-        const buffered = video.buffered;
-        const duration = video.duration;
-        if (duration && buffered.length > 0) {
-          if (buffered.end(0) >= Math.min(2, duration)) {
-            video.play().catch(() => {});
-            return;
-          }
+      let attempts = 0;
+      function attemptPlay() {
+        attempts++;
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {
+            if (attempts < 5) setTimeout(attemptPlay, 1000);
+          });
         }
-        setTimeout(tryPlay, 200);
       }
 
-      video.addEventListener('loadedmetadata', () => {
-        video.play().catch(() => {});
-        tryPlay();
-      });
+      video.addEventListener('playing', () => video.classList.add('is-playing'));
 
-      if (video.readyState >= 1) {
-        tryPlay();
-      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              attemptPlay();
+              io.unobserve(video);
+            }
+          });
+        },
+        { rootMargin: '600px 0px' }
+      );
+      io.observe(video);
 
-      // Smooth crossfade loop using requestAnimationFrame
-      function updateOpacity() {
-        if (video.duration && !video.paused) {
-          const timeFromEnd = video.duration - video.currentTime;
-          const timeFromStart = video.currentTime;
-          let opacity = 1;
-
-          if (timeFromEnd < fadeDuration) {
-            opacity = Math.max(0, timeFromEnd / fadeDuration);
-          } else if (timeFromStart < fadeDuration) {
-            opacity = Math.min(1, timeFromStart / fadeDuration);
-          }
-
-          video.style.opacity = opacity.toFixed(3);
-        }
-        requestAnimationFrame(updateOpacity);
-      }
-      requestAnimationFrame(updateOpacity);
-
-      // Pause rendering when tab is hidden to save resources
+      // Browsers pause background-tab video; resume once visible again.
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          video.pause();
-        } else {
-          video.play().catch(() => {});
+        if (!document.hidden && video.paused && video.readyState > 0) {
+          attempts = 0;
+          attemptPlay();
         }
       });
     })();
@@ -222,17 +212,17 @@ const socials = [
 <style>
   /* =========================================================================
      Footer — Kresna-inspired two-card layout
-     Fonts: Plus Jakarta Sans (headings/logo) + Inter (body/links/buttons)
-     Brand: Hyperformance Media, blue #2563eb
+     Fonts: Bricolage Grotesque (headings/logo) + Manrope (body/links/buttons)
+     Brand: Hyperformance Media, blue var(--theme-primary)
      ========================================================================= */
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   .footer-section {
-    background: #ffffff;
+    background: var(--color-background);
     padding: 48px 24px;
-    font-family: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
-    color: #2d3148;
+    font-family: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    color: var(--color-text-primary);
   }
 
   /* --- Wrapper: two-card grid --- */
@@ -253,7 +243,7 @@ const socials = [
     border-radius: 28px;
     padding: 32px;
     overflow: hidden;
-    background: #1e4fc0;
+    background: var(--theme-primary-dark);
     box-shadow: 0 12px 40px rgba(21, 76, 189, 0.25);
     display: flex;
     flex-direction: column;
@@ -269,7 +259,11 @@ const socials = [
     z-index: 0;
     pointer-events: none;
     opacity: 0;
-    will-change: opacity;
+    transition: opacity 0.6s ease;
+  }
+
+  .footer-left-video.is-playing {
+    opacity: 1;
   }
 
   /* --- Logo --- */
@@ -290,16 +284,16 @@ const socials = [
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 16px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     color: white;
     letter-spacing: -0.02em;
   }
 
   .footer-logo-name {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 20px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     letter-spacing: -0.02em;
@@ -320,8 +314,8 @@ const socials = [
   }
 
   .footer-tagline {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 19px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.1875rem;
     font-weight: 400;
     color: white;
     line-height: 1.45;
@@ -342,8 +336,8 @@ const socials = [
   }
 
   .footer-social-label {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 0.9375rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
     letter-spacing: 0.3px;
@@ -381,7 +375,7 @@ const socials = [
 
   /* --- RIGHT CARD --- */
   .footer-right {
-    background: #f0f1f5;
+    background: var(--color-surface);
     border-radius: 28px;
     padding: 40px;
     overflow: visible;
@@ -410,7 +404,7 @@ const socials = [
     height: 96px;
     border-radius: 22px;
     transform: rotate(-10deg);
-    background: linear-gradient(135deg, #66f0ff 0%, #00e5ff 55%, #00b8cc 100%);
+    background: linear-gradient(135deg, var(--theme-primary-light) 0%, var(--theme-primary) 55%, var(--theme-primary-dark) 100%);
     box-shadow:
       inset 3px 3px 8px rgba(255, 255, 255, 0.35),
       inset -3px -3px 12px rgba(0, 0, 0, 0.18),
@@ -421,8 +415,8 @@ const socials = [
   }
 
   .lucky-cube-mark {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 42px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 2.625rem;
     font-weight: 700;
     color: white;
     letter-spacing: -0.04em;
@@ -460,8 +454,8 @@ const socials = [
   }
 
   .lucky-text {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 17px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.0625rem;
     font-weight: 600;
     color: #9ca3af;
     white-space: nowrap;
@@ -483,8 +477,8 @@ const socials = [
   }
 
   .footer-col-title {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 18px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.125rem;
     font-weight: 600;
     color: #9ca3af;
     margin-bottom: 18px;
@@ -492,17 +486,17 @@ const socials = [
 
   .footer-col a {
     display: block;
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    font-size: 14px;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-size: 0.875rem;
     font-weight: 600;
-    color: #111827;
+    color: var(--color-text-primary);
     margin-bottom: 14px;
     text-decoration: none;
     transition: color 0.2s;
   }
 
   .footer-col a:hover {
-    color: #1f65d6;
+    color: var(--color-primary);
   }
 
   /* --- Bottom row --- */
@@ -514,8 +508,8 @@ const socials = [
   }
 
   .footer-copyright {
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    font-size: 12.5px;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-size: 0.78125rem;
     font-weight: 500;
     color: #9ca3af;
   }
@@ -527,8 +521,8 @@ const socials = [
   }
 
   .footer-cta-mini h4 {
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    font-size: 15px;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-size: 0.9375rem;
     font-weight: 400;
     color: #6b7280;
     line-height: 1.45;
@@ -536,18 +530,18 @@ const socials = [
 
   .footer-cta-mini h4 strong {
     display: block;
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
-    font-size: 19px;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.1875rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--color-text-primary);
   }
 
   /* --- Subscribe row --- */
   .footer-subscribe-row {
     display: flex;
     width: 310px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
@@ -559,9 +553,9 @@ const socials = [
     background: transparent;
     border: none;
     outline: none;
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    font-size: 13.5px;
-    color: #111827;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-size: 0.84375rem;
+    color: var(--color-text-primary);
   }
 
   .footer-subscribe-row input::placeholder {
@@ -570,12 +564,12 @@ const socials = [
 
   .footer-subscribe-row button {
     padding: 11px 22px;
-    background: #00e5ff;
+    background: var(--theme-primary);
     color: #000000;
     border: none;
     border-radius: 8px;
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    font-size: 13.5px;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-size: 0.84375rem;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 6px 20px rgba(0, 229, 255, 0.28), 0 2px 8px rgba(0, 229, 255, 0.15);
@@ -583,7 +577,7 @@ const socials = [
   }
 
   .footer-subscribe-row button:hover {
-    background: #00b8cc;
+    background: var(--theme-primary-dark);
     box-shadow: 0 10px 28px rgba(0, 229, 255, 0.38), 0 4px 12px rgba(0, 229, 255, 0.2);
     transform: translateY(-1px);
   }
@@ -609,11 +603,16 @@ const socials = [
   }
 
   .footer-watermark text {
-    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
     font-weight: 700;
     letter-spacing: -0.03em;
     font-size: clamp(48px, 8vw, 92px);
-    fill: rgba(0, 0, 0, 0.035);
+    fill: var(--color-text-primary);
+    opacity: 0.04;
+  }
+
+  :global(.dark) .footer-watermark text {
+    opacity: 0.08;
   }
 
   /* --- Responsive --- */
@@ -651,7 +650,7 @@ const socials = [
       height: 72px;
     }
     .lucky-cube-mark {
-      font-size: 32px;
+      font-size: 2rem;
     }
   }
 </style>

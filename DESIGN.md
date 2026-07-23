@@ -2,47 +2,52 @@
 name: Hyperformance Media
 description: AI-powered digital marketing agency — bold, tech-forward, trust-building
 colors:
-  primary: "#2563eb"
-  primary-dark: "#1d4ed8"
-  primary-light: "#3b82f6"
-  background: "#ffffff"
-  surface: "#f8f9fb"
-  text-primary: "#0f172a"
-  text-secondary: "#64748b"
-  border: "#e2e8f0"
+  primary: "#00e5ff"
+  primary-dark: "#00b8cc"
+  primary-light: "#66f0ff"
+  background: "#050b14"
+  surface: "#0a1323"
+  text-primary: "#ffffff"
+  text-secondary: "#94a3b8"
+  border: "#1e293b"
+  light-background: "#ffffff"
+  light-surface: "#f8f9fb"
+  light-text-primary: "#0f172a"
+  light-text-secondary: "#64748b"
+  light-border: "#e2e8f0"
 typography:
   display:
-    fontFamily: "Plus Jakarta Sans Variable, Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "3.5rem"
     fontWeight: 700
     lineHeight: 1.07
     letterSpacing: "normal"
   headline:
-    fontFamily: "Plus Jakarta Sans Variable, Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "2.75rem"
     fontWeight: 700
     lineHeight: 1.1
     letterSpacing: "normal"
   title:
-    fontFamily: "Plus Jakarta Sans Variable, Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Bricolage Grotesque Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.5rem"
     fontWeight: 600
     lineHeight: 1.25
     letterSpacing: "normal"
   body:
-    fontFamily: "Inter Variable, Inter, ui-sans-serif, system-ui, -apple-system, sans-serif"
+    fontFamily: "Manrope Variable, ui-sans-serif, system-ui, -apple-system, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
   body-lg:
-    fontFamily: "Inter Variable, Inter, ui-sans-serif, system-ui, -apple-system, sans-serif"
+    fontFamily: "Manrope Variable, ui-sans-serif, system-ui, -apple-system, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
   label:
-    fontFamily: "Inter Variable, Inter, ui-sans-serif, system-ui, -apple-system, sans-serif"
+    fontFamily: "Manrope Variable, ui-sans-serif, system-ui, -apple-system, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 500
     lineHeight: 1.5
@@ -102,13 +107,13 @@ components:
 
 This is a marketing website for an AI-powered digital marketing agency serving small and medium businesses across India. The design needs to do one thing: make a skeptical SMB owner feel "these people know what they're doing, and they can do it for me." That means confidence through clarity, not flash. Every element is purposeful — the visual equivalent of a well-tuned engine where every part does exactly what it should, nothing more.
 
-The system is built on a single blue accent (`#2563eb`) against white and near-white surfaces, with Plus Jakarta Sans carrying headlines (geometric, confident) and Inter carrying body (neutral, legible). Restraint is the point: one accent color, two fonts, two surface tones, one shadow family. The boldness lives in the typography scale and the directness of the copy, not in visual complexity. Sections alternate between white and `#f8f9fb` to create rhythm without color noise.
+The system is built on a single cyan accent (`#00e5ff`) against white and near-white surfaces, with Bricolage Grotesque carrying headlines (bold, experimental) and Manrope carrying body (clean, legible). Restraint is the point: one accent color, two fonts, two surface tones, one shadow family. The boldness lives in the typography scale and the directness of the copy, not in visual complexity. Sections alternate between white and `#f8f9fb` to create rhythm without color noise.
 
 What this system explicitly rejects: stock-photo agency templates with blue gradient heroes, "we are passionate" copy, trust badges, identical 4-card service grids, and any layout that could be guessed as "agency site" from the structure alone. The personality is bold and tech-forward, but the delivery is quiet — trust and relief, not anxiety or hype.
 
 **Key Characteristics:**
-- Single-accent palette (blue `#2563eb` on white/surface neutrals)
-- Two-font system (Plus Jakarta Sans display + Inter body)
+- Single-accent palette (cyan `#00e5ff` on white/surface neutrals)
+- Two-font system (Bricolage Grotesque display + Manrope body)
 - Restrained radius (12px cards, 8px buttons — not bubbly)
 - Low-opacity ambient shadows (depth without heaviness)
 - Alternating section backgrounds for rhythm
@@ -116,31 +121,38 @@ What this system explicitly rejects: stock-photo agency templates with blue grad
 
 ## 2. Colors
 
-A single-accent system: one professional blue carries all brand energy against a white-to-near-white neutral surface range. No secondary or tertiary accents — the blue's rarity is what makes it land.
+A single-accent system: one tech cyan carries all brand energy against a near-black neutral surface range. Dark mode is the default, primary theme for this site — it reinforces the tech-forward, AI-powered positioning and makes the cyan accent pop. Light mode is available as an opt-in alternate (persisted via `localStorage.theme === 'light'`) for visitors who prefer it, but every page should be designed dark-first. No secondary or tertiary accents — the cyan's rarity is what makes it land in either theme.
 
-### Primary
-- **Professional Blue** (`#2563eb`): The single brand accent. Used on primary CTAs, links, active states, icon backgrounds (`primary/10` tint), and the final CTA band. Appears on ≤15% of any given screen — its restraint is the point.
-- **Blue Deep** (`#1d4ed8`): Hover and pressed states for primary buttons. Slightly darker, same hue.
-- **Blue Light** (`#3b82f6`): Available for subtle highlights and focus rings; used sparingly.
+### Primary (both themes)
+- **Tech Cyan** (`#00e5ff`): The single brand accent. Used on primary CTAs, links, active states, icon backgrounds (`primary/10` tint), and the final CTA band. Appears on ≤15% of any given screen — its restraint is the point.
+- **Cyan Deep** (`#00b8cc`): Hover and pressed states for primary buttons. Slightly darker, same hue.
+- **Cyan Light** (`#66f0ff`): Available for subtle highlights and focus rings; used sparingly.
 
-### Neutral
-- **White** (`#ffffff`): Default page background. The clean canvas.
+### Neutral — Dark (default theme)
+- **Deep Space** (`#050b14`): Default page background. Near-black with a cool blue undertone.
+- **Surface** (`#0a1323`): Slightly lifted dark surface for alternating sections and card backgrounds. Reads as "elevated panel," not flat black.
+- **White** (`#ffffff`): Primary text and headings in dark mode.
+- **Slate** (`#94a3b8`): Body copy, subtext, and secondary labels against the dark background.
+- **Border** (`#1e293b`): Dark slate for dividers, card borders, input strokes. Visible but never loud.
+
+### Neutral — Light (opt-in alternate)
+- **White** (`#ffffff`): Page background when a visitor opts into light mode.
 - **Surface** (`#f8f9fb`): Very light cool-neutral for alternating sections and card backgrounds on white pages. Barely tinted — reads as "off-white" not "gray."
 - **Ink** (`#0f172a`): Near-black for all headings and primary text. Slate undertone, not pure black.
 - **Slate** (`#64748b`): Medium gray for body copy, subtext, and secondary labels. Hits 4.5:1 contrast against white.
 - **Border** (`#e2e8f0`): Light gray for dividers, card borders, input strokes. Visible but never loud.
 
 ### Named Rules
-**The One Accent Rule.** Blue `#2563eb` is the only saturated color in the system. No purples, no greens, no gradients, no warm accents. If something needs to stand out, it uses blue or it uses weight/size — never a second hue.
+**The One Accent Rule.** Cyan `#00e5ff` is the only saturated color in the system, in both themes. No purples, no greens, no gradients, no warm accents. If something needs to stand out, it uses cyan or it uses weight/size — never a second hue.
 
-**The Surface Alternation Rule.** Sections alternate between white (`#ffffff`) and surface (`#f8f9fb`) to create visual rhythm. Never two surface sections in a row; never three white sections in a row without a break.
+**The Surface Alternation Rule.** Sections alternate between background and surface tones (dark: `#050b14` / `#0a1323`; light: `#ffffff` / `#f8f9fb`) to create visual rhythm. Never two surface sections in a row; never three background sections in a row without a break.
 
 ## 3. Typography
 
-**Display Font:** Plus Jakarta Sans Variable (with Plus Jakarta Sans, ui-sans-serif, system-ui fallback)
-**Body Font:** Inter Variable (with Inter, ui-sans-serif, system-ui, -apple-system fallback)
+**Display Font:** Bricolage Grotesque Variable (with ui-sans-serif, system-ui fallback)
+**Body Font:** Manrope Variable (with ui-sans-serif, system-ui, -apple-system fallback)
 
-**Character:** Plus Jakarta Sans is geometric and confident — modern without being cold, friendly without being casual. Inter is the neutral workhorse: legible at every size, invisible as a personality, which is exactly what body text should be. The pairing works because they're different enough (geometric display vs. neo-grotesque body) to create hierarchy, but both are sans-serif so the system feels unified.
+**Character:** Bricolage Grotesque is experimental and bold — striking and confident. Manrope is the neutral workhorse: legible at every size, invisible as a personality, which is exactly what body text should be. The pairing works because they're different enough (grotesque display vs. geometric body) to create hierarchy, but both are sans-serif so the system feels unified.
 
 ### Hierarchy
 - **Display / H1** (700, 3.5rem / 56px, line-height 1.07): Hero headline only. One per page. `text-wrap: balance` for even line lengths.
@@ -151,7 +163,7 @@ A single-accent system: one professional blue carries all brand energy against a
 - **Label** (500, 0.875rem / 14px, line-height 1.5): Captions, meta, eyebrow labels (uppercase, tracked +0.05em when used as eyebrow).
 
 ### Named Rules
-**The Two-Font Rule.** Plus Jakarta Sans for headings, Inter for everything else. No exceptions, no third family. If a special treatment is needed, use weight or size within the existing families.
+**The Two-Font Rule.** Bricolage Grotesque for headings, Manrope for everything else. No exceptions, no third family. If a special treatment is needed, use weight or size within the existing families.
 
 **The Eyebrow Restraint Rule.** Uppercase tracked eyebrows (`text-body-sm font-medium uppercase tracking-wider text-primary`) are used on section headers, but not on every section — vary the cadence so they don't become the saturated AI scaffold. Some sections lead with the headline directly.
 
@@ -209,9 +221,9 @@ This system uses low-opacity ambient shadows — depth without heaviness. Shadow
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** use blue `#2563eb` as the single accent for all interactive elements, links, and brand moments. Its rarity is what makes it land.
+- **Do** use cyan `#00e5ff` as the single accent for all interactive elements, links, and brand moments. Its rarity is what makes it land.
 - **Do** alternate section backgrounds between white (`#ffffff`) and surface (`#f8f9fb`) for rhythm.
-- **Do** use Plus Jakarta Sans for all headings and Inter for all body copy. Weight and size create hierarchy, not font switching.
+- **Do** use Bricolage Grotesque for all headings and Manrope for all body copy. Weight and size create hierarchy, not font switching.
 - **Do** keep body line length at 65–75ch (`max-w-3xl` or `max-w-2xl` on lead paragraphs).
 - **Do** use `text-wrap: balance` on h1–h3 for even line lengths.
 - **Do** back every claim with a concrete number or example. "We doubled their traffic in 4 months" not "we deliver exceptional results."
@@ -226,5 +238,5 @@ This system uses low-opacity ambient shadows — depth without heaviness. Shadow
 - **Don't** use border-left or border-right greater than 1px as a colored accent stripe on cards or callouts.
 - **Don't** use glassmorphism (blurs, glass cards) decoratively. Rare and purposeful, or nothing.
 - **Don't** use identical same-sized cards with icon + heading + text repeated endlessly. Vary the layout when the content varies.
-- **Don't** use dark mode for this site. The audience is SMB owners in India — clarity and legibility on bright screens in daylight is the physical scene.
+- **Don't** treat light mode as an afterthought — it's an intentional opt-in alternate, not the default, so it still needs to hit the same contrast and legibility bar as dark mode.
 - **Don't** use "passionate," "cutting-edge," "synergistic," "leverage," or any marketing jargon a hundred other agency sites use. Direct, concrete, human.

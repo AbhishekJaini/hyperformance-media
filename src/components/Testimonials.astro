@@ -1,26 +1,27 @@
 ---
-// Testimonials section — 3-card grid, white background
-// TODO: These are PLACEHOLDER testimonials with fictional names/companies.
-// Real client testimonials need to be collected and swapped in here.
-// Do NOT attribute quotes to real clients without their actual written testimonials.
+// Testimonials section — real client quotes, 4-card grid
+import TiltCard from './TiltCard.astro';
+
 const testimonials = [
   {
-    quote: 'Hyperformance Media transformed our online presence. Our organic traffic doubled in four months and the leads keep coming.',
-    name: 'Sarah Mitchell',
-    role: 'Founder, Lumen Retail',
+    quote: 'I am amazed by their work. I am a fitness content creator, and I was struggling for social media reach. They helped me get more reachability and visibility.',
+    name: 'Rajat Sharma',
+    initials: 'RS',
+  },
+  {
+    quote: 'I required an urgent website for showcasing my work. Their website creation services are so good — my need was fulfilled in no time.',
+    name: 'Satvik Maheshwari',
     initials: 'SM',
   },
   {
-    quote: 'The team rebuilt our website and SEO strategy from the ground up. We finally rank on page one for our key terms.',
-    name: 'David Chen',
-    role: 'CEO, Northwind Logistics',
-    initials: 'DC',
+    quote: 'I needed search engine optimization for my personal blog website. I am really impressed with the work they did for me.',
+    name: 'Prerna Kaushik',
+    initials: 'PK',
   },
   {
-    quote: 'Professional, data-driven, and genuinely invested in our growth. Best marketing partner we have worked with.',
-    name: 'Priya Nair',
-    role: 'Marketing Director, Atlas SaaS',
-    initials: 'PN',
+    quote: 'I needed help with email marketing for my business. They provided me a great service — their team is very professional, and I am happy with their work.',
+    name: 'Shashank Vashishtha',
+    initials: 'SV',
   },
 ];
 ---
@@ -28,49 +29,41 @@ const testimonials = [
   <div class="mx-auto max-w-7xl">
     <!-- Header -->
     <div class="mx-auto max-w-2xl text-center">
-      <span class="inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-body-sm font-medium uppercase tracking-wider text-primary" data-reveal="fade">
-        <span class="inline-block h-2 w-2 rounded-full bg-primary" style="animation: dot-pulse 2.5s ease-in-out infinite;"></span>
-        What Our Clients Say
-      </span>
+
       <h2 class="mt-6 text-h2 text-text-primary" data-reveal data-reveal-delay="1">Client Testimonials</h2>
     </div>
 
-    <!-- 3-column equal-sized card grid -->
-    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+    <!-- 4-column equal-sized card grid -->
+    <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {testimonials.map((t, i) => (
-        <div
-          class="flex flex-col rounded-card border border-border bg-background p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-2 hover:border-primary/30"
-          data-reveal="scale"
-          data-reveal-delay={i + 1}
-        >
-          <!-- Star rating -->
-          <div class="flex gap-1 text-primary" role="img" aria-label="5 out of 5 stars">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <svg class="h-5 w-5 transition-transform duration-300" style={`transition-delay: ${s * 50}ms;`} fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
+        <TiltCard revealDelay={i + 1}>
+          <div class="glass-card flex h-full flex-col rounded-card border p-8 transition-[box-shadow] duration-300">
+            <!-- Star rating -->
+            <div class="flex gap-1 text-primary" role="img" aria-label="5 out of 5 stars">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <svg class="h-5 w-5 transition-transform duration-300" style={`transition-delay: ${s * 50}ms;`} fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
 
-          <!-- Quote -->
-          <blockquote class="mt-4 text-body leading-relaxed text-text-secondary">
-            &ldquo;{t.quote}&rdquo;
-          </blockquote>
+            <!-- Quote -->
+            <blockquote class="mt-4 text-body leading-relaxed text-text-secondary">
+              &ldquo;{t.quote}&rdquo;
+            </blockquote>
 
-          <!-- Author — pushed to bottom -->
-          <div class="mt-auto pt-6">
-            <div class="flex items-center gap-3">
-              <!-- Avatar initials circle -->
-              <div class="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary text-body font-semibold text-white transition-transform duration-300 group-hover:scale-110">
-                {t.initials}
-              </div>
-              <div>
+            <!-- Author — pushed to bottom -->
+            <div class="mt-auto pt-6">
+              <div class="flex items-center gap-3">
+                <!-- Avatar initials circle -->
+                <div class="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary text-body font-semibold text-white transition-transform duration-300 group-hover:scale-110">
+                  {t.initials}
+                </div>
                 <div class="text-body font-semibold text-text-primary">{t.name}</div>
-                <div class="text-body-sm text-text-secondary">{t.role}</div>
               </div>
             </div>
           </div>
-        </div>
+        </TiltCard>
       ))}
     </div>
   </div>

@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FinalCta from '../components/FinalCta.astro';
-import { Image } from 'astro:assets';
-import servicesGraphic from '../assets/services-graphic.jpg';
+import ServicesNetwork from '../components/ServicesNetwork.astro';
+import TiltCard from '../components/TiltCard.astro';
 
 // 8 real services from client content — clean 2-column grid (4 rows)
 const services = [
@@ -10,6 +10,11 @@ const services = [
     title: 'Website Development',
     body: 'User-friendly, mobile-optimized, digital-marketing-friendly websites that drive engagement, generate leads, and boost conversions. From corporate sites to full-scale e-commerce platforms.',
     icon: 'M3 5h18v14H3zM3 9h18M9 9v10',
+  },
+  {
+    title: 'Next-Gen AI Modelling',
+    body: 'Advanced SEO techniques including geo-tagging for city, state, and country visibility. Local keyword optimization, competitor SWOT analysis, and targeting first-page Google rankings.',
+    icon: 'M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4 4 4 0 0 1-4-4V6a4 4 0 0 1 4-4zM6 20a6 6 0 0 1 12 0',
   },
   {
     title: 'Search Engine Optimisation',
@@ -25,11 +30,6 @@ const services = [
     title: 'E-Commerce',
     body: 'Managing brand presence across Amazon, Flipkart, Meesho, and other marketplaces. Account setup, SEO-driven listings, inventory management, A+ content creation, order tracking, and platform compliance.',
     icon: 'M3 3h18l-2 4H5L3 3zM5 7h14l-1 14H6L5 7zM9 11h6',
-  },
-  {
-    title: 'Next-Gen AI Modelling',
-    body: 'Advanced SEO techniques including geo-tagging for city, state, and country visibility. Local keyword optimization, competitor SWOT analysis, and targeting first-page Google rankings.',
-    icon: 'M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4 4 4 0 0 1-4-4V6a4 4 0 0 1 4-4zM6 20a6 6 0 0 1 12 0',
   },
   {
     title: 'Social Media Management',
@@ -98,14 +98,8 @@ const servicesSchema = {
         </div>
         
         <div class="relative" data-reveal="scale" data-reveal-delay="2">
-          <div class="relative rounded-2xl bg-surface/50 p-2 shadow-xl ring-1 ring-border/50">
-            <Image 
-              src={servicesGraphic} 
-              alt="Hyperperformance Media Services Ecosystem" 
-              class="w-full rounded-xl object-cover mix-blend-multiply dark:mix-blend-normal"
-              width={600}
-              height={600}
-            />
+          <div class="relative rounded-2xl bg-surface/50 p-2 shadow-xl ring-1 ring-border/50 dark:bg-[#07101d] dark:ring-primary/20 dark:shadow-[0_24px_64px_rgb(0_229_255_/_0.1)]">
+            <ServicesNetwork />
           </div>
         </div>
       </div>
@@ -131,24 +125,22 @@ const servicesSchema = {
     <div class="relative z-10 mx-auto max-w-6xl">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
         {services.map((service, i) => (
-          <div
-            class="group relative overflow-hidden rounded-card border border-border bg-background p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-2 hover:border-primary/40"
-            data-reveal="scale"
-            data-reveal-delay={(i % 2) + 1}
-          >
-            <!-- Accent top border that appears on hover -->
-            <div class="absolute inset-x-0 top-0 h-1 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+          <TiltCard revealDelay={(i % 2) + 1}>
+            <div class="glass-card relative h-full overflow-hidden rounded-card border p-8 transition-[box-shadow] duration-300">
+              <!-- Accent top border that appears on hover -->
+              <div class="absolute inset-x-0 top-0 h-1 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
-            <div class="relative mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:shadow-lg">
-              <div class="absolute inset-0 rounded-2xl border border-primary/20 scale-110 opacity-0 transition-all duration-500 group-hover:scale-125 group-hover:opacity-100 group-hover:border-primary/30"></div>
-              <svg class="relative z-10 h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
-              </svg>
+              <div class="relative mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/5 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:shadow-lg">
+                <div class="absolute inset-0 rounded-2xl border border-primary/20 scale-110 opacity-0 transition-all duration-500 group-hover:scale-125 group-hover:opacity-100 group-hover:border-primary/30"></div>
+                <svg class="relative z-10 h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+                </svg>
+              </div>
+
+              <h2 class="text-h4 text-text-primary group-hover:text-primary transition-colors duration-300">{service.title}</h2>
+              <p class="mt-4 text-body text-text-secondary leading-relaxed">{service.body}</p>
             </div>
-            
-            <h2 class="text-h4 text-text-primary group-hover:text-primary transition-colors duration-300">{service.title}</h2>
-            <p class="mt-4 text-body text-text-secondary leading-relaxed">{service.body}</p>
-          </div>
+          </TiltCard>
         ))}
       </div>
     </div>
